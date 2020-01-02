@@ -47,6 +47,8 @@ execute:
 clean:
 	rm -f HelloWorld $(O_FOLDER)/*.o *~ core $(H_FOLDER)/*~
 
+
+# --------------------------------   GIT RULES   ---------------------------------
 git-init:
 	git init
 
@@ -62,9 +64,10 @@ git-commit:
 git-push:
 	git push origin master
 
-# First create an empty repository in git
+# (IMPORTANT!!) First create an empty repository in gitHub 
+# Then execute this command
 git-first-of-all: git-init git-remote
-	 
+
 git-upload: git-add git-commit git-push
 
 # git pull (your repository url)
