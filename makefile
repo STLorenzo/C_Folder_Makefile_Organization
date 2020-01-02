@@ -18,6 +18,7 @@ DEPS = $(patsubst %, $(H_FOLDER)/%, $(_DEPS))
 _OBJ = HelloWorld.o hellofunc.o
 OBJ = $(patsubst %, $(O_FOLDER)/%, $(_OBJ))
 
+# GitHub URL
 URL = https://github.com/pipematin/C_Folder_Makefile_Organization.git
 
 # %.o all files with .o sufix
