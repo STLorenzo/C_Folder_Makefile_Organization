@@ -19,6 +19,7 @@ _OBJ = HelloWorld.o hellofunc.o
 OBJ = $(patsubst %, $(O_FOLDER)/%, $(_OBJ))
 
 # GitHub URL
+COMMIT_MSG = "commited from Makefile"
 URL = https://github.com/pipematin/C_Folder_Makefile_Organization.git
 
 # %.o all files with .o sufix
@@ -56,7 +57,7 @@ git-add:
 	git add .
 
 git-commit:
-	git commit -m "commited from makefile"
+	git commit -m $(COMMIT_MSG)
 
 git-push:
 	git push origin master
