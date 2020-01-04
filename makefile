@@ -1,5 +1,7 @@
 # Makefile
 
+PROGRAM_NAME=HelloWorld
+
 SRC_FOLDER=src
 H_FOLDER=headers
 O_FOLDER=objects
@@ -23,21 +25,31 @@ COMMIT_MSG = "commited from Makefile"
 URL = https://github.com/pipematin/C_Folder_Makefile_Organization.git
 
 # %.o all files with .o sufix
-# $@ (the rule) item in the left side of the : 
+# $@ (the rule) item at the left side of the : 
 # $^ dependency list (all the right side of the : )
 # $< first item in dependency list (right side of the : )
 
 $(O_FOLDER)/%.o: $(SRC_FOLDER)/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-HelloWorld: $(OBJ)
+$(PROGRAM_NAME): $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 
 # To use this rules write: make (rule)
 # Example: make execute
 execute:
-	./HelloWorld
+	./$(PROGRAM_NAME)
+
+# Debug flag so the compilation is ready to use with gdb.
+# More info in: https://www.cs.umd.edu/~srhuang/teaching/cmsc212/gdb-tutorial-handout.pdf
+debug: CFLAGS += -g
+debug: $(PROGRAM_NAME)
+
+# Valgrind execution to check for memory leaks of the program
+# More info in: https://valgrind.org/docs/manual/quick-start.html
+valgrind: 
+	valgrind --leak-check=yes --verbose --show-leak-kinds=all --track-origins=yes ./$(PROGRAM_NAME)
 
 # .PHONY clean -> keeps make from doing something with a file named clean
 .PHONY: clean
@@ -45,7 +57,7 @@ execute:
 # core ->file with information about program state when it crashed. 
 # Created when this happen if core dumps are enabled: Segmentation fault(core dumped) 
 clean:
-	rm -f HelloWorld $(O_FOLDER)/*.o *~ core $(H_FOLDER)/*~
+	rm -f $(PROGRAM_NAME) $(O_FOLDER)/*.o *~ core $(H_FOLDER)/*~
 
 
 # --------------------------------   GIT RULES   ---------------------------------
